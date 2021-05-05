@@ -10,7 +10,11 @@ public class Inquiry {
     private LocalDateTime created;
     
     public Inquiry(String name, String email, String contents) {
+        this.name = name;
+        this.email = email;
+        this.contents = contents;
     }
+
     public String getName(){
         return name;
     }
