@@ -19,18 +19,18 @@ public class Inquiry {
         return name;
     }
     public String getEmail(){
-    return email;
+        return email;
     }
     public String getContents(){
-    return contents;
+        return contents;
     }
     public void setName(String name){
-    this.name = name;
+        this.name = name;
     }
     public void setEmail(String email){
-    this.email = email;
+        this.email = email;
     }
     public void setContents(String contents){
-    this.contents = contents;
+        this.contents = contents;
     }
   }

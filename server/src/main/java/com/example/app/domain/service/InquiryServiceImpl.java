@@ -9,11 +9,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class InquiryServiceImpl implements InquiryService {
   
-  private InquiryDao dao;
+  public InquiryDao dao;
   
-//   public InquiryServiceImpl(InquiryDao dao) {
-//     this.dao = dao;
-//   }
+  @Autowired
+  public InquiryServiceImpl(InquiryDao dao) {
+    this.dao = dao;
+  }
+
   @Override
   public void save(Inquiry inquiry) {
     dao.create(inquiry);

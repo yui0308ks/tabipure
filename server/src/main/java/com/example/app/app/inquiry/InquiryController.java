@@ -38,7 +38,8 @@ public class InquiryController {
       //TODO Exception
     }
     Inquiry inquiry = new Inquiry(inquiryForm.getName(), inquiryForm.getEmail(), inquiryForm.getContents());
-    System.out.println(inquiry);
+    System.out.println("name");
+    System.out.println(inquiry.getName());
     service.save(inquiry);
     return "inquiry/complete.html";
   }
