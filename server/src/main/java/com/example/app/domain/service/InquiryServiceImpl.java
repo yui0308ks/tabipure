@@ -1,5 +1,7 @@
 package com.example.app.domain.service;
 
+import java.util.List;
+
 import com.example.app.domain.dao.InquiryDao;
 import com.example.app.domain.entity.Inquiry;
 
@@ -19,5 +21,17 @@ public class InquiryServiceImpl implements InquiryService {
   @Override
   public void save(Inquiry inquiry) {
     dao.create(inquiry);
+  }
+
+  public List<Inquiry> getAll() {
+    return dao.getAll();
+  }
+
+  public Inquiry findById(int id) {
+    return dao.findById(id);
+  }
+
+  public void delete(int id) {
+    dao.delete(id);
   }
 }
