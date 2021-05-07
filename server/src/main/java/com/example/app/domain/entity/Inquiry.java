@@ -15,6 +15,10 @@ public class Inquiry {
         this.contents = contents;
     }
 
+    //Non argument constructor
+    public Inquiry() {
+    }
+
     public String getName(){
         return name;
     }
@@ -23,6 +27,10 @@ public class Inquiry {
     }
     public String getContents(){
         return contents;
+    }
+    
+    public void setId(int id){
+        this.id = id;
     }
     public void setName(String name){
         this.name = name;
@@ -33,4 +41,7 @@ public class Inquiry {
     public void setContents(String contents){
         this.contents = contents;
     }
+    public void setCreated(LocalDateTime created){
+        this.created = created;
+    }   
   }
