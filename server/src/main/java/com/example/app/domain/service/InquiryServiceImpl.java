@@ -34,4 +34,8 @@ public class InquiryServiceImpl implements InquiryService {
   public void delete(int id) {
     dao.delete(id);
   }
+
+  public void update(Inquiry inquiry) {
+    dao.update(inquiry);
+  }
 }

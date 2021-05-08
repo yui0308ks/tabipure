@@ -54,6 +54,11 @@ public class InquiryDaoImpl implements InquiryDao {
       return inquirys;
     }
 
+    public void update(Inquiry inquiry) {
+      jdbcTemplate.update("UPDATE inquiry SET name = ?, email = ?, contents = ? WHERE id = ?",
+        inquiry.getName(), inquiry.getEmail(), inquiry.getContents(), inquiry.getId());
+    }
+    
     public void delete(int id) {
       jdbcTemplate.update("DELETE  FROM inquiry WHERE id = ?", id);
     }
