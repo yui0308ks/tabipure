@@ -15,4 +15,6 @@ public interface InquiryDao {
     Inquiry findById(int id);
 
     void delete(int id);
+
+    void update(Inquiry inquiry);
 }

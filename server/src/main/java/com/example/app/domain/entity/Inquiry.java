@@ -18,7 +18,9 @@ public class Inquiry {
     //Non argument constructor
     public Inquiry() {
     }
-
+    public int getId(){
+        return id;
+    }
     public String getName(){
         return name;
     }
