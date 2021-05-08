@@ -6,7 +6,7 @@
 </head>
 <body>
     <form method="post" action="/inquiry/confirm" th:object="${inquiryForm}">
-        <!-- <p th:if="${#fields.hasErrors('name')}">お名前にエラーがあります。</p> -->
+        <p th:if="${#fields.hasErrors('name')}">お名前にエラーがあります。</p>
         <div class="field">
           <label for="name">お名前</label><span class="tag">必須</span><br />
           <input type="text" id="name" name="name" th:value="*{name}" th:class="${#fields.hasErrors('name')} ? border-red">
