@@ -9,8 +9,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/inquiry")
@@ -42,5 +44,24 @@ public class InquiryController {
     System.out.println(inquiry.getName());
     service.save(inquiry);
     return "inquiry/complete.html";
+  }
+
+  @GetMapping("/list")
+  public String list(Model model) {
+    model.addAttribute("inquirys", service.getAll());
+    System.out.println(model.addAttribute("inquirys", service.getAll()));
+    return "inquiry/list.html";
+  }
+
+  @GetMapping("/detail/{id}")
+  public String detail(@PathVariable("id") int id, Model model) {
+    model.addAttribute("inquiry", service.findById(id));
+    return "inquiry/detail.html";
+  }
+
+  @PostMapping("/delete")
+  public String detail(@RequestParam("id") int id) {
+    service.delete(id);
+    return "redirect:/inquiry/list";
   }
 }
