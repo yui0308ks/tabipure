@@ -2,6 +2,7 @@ package com.example.app.app.inquiry;
 
 import javax.servlet.http.HttpServletResponse;
 
+import com.example.app.app.inquiry.exception.CustomControllerAdvice;
 import com.example.app.domain.entity.Inquiry;
 import com.example.app.domain.service.InquiryService;
 
@@ -63,7 +64,7 @@ public class InquiryController {
     try {
       model.addAttribute("inquiry", service.findById(id));
     } catch (EmptyResultDataAccessException e) {
-      return "redirect:/inquiry/list";
+      return "redirect:/inquiry/error";
     }
     return "inquiry/detail.html";
   }
@@ -71,13 +72,17 @@ public class InquiryController {
   @PostMapping("/delete")
   public String detail(@RequestParam("id") int id) {
     service.delete(id);
-    return "redirect:/inquiry/list";
+    return "redirect:/inquiry/error";
   }
 
-  @ExceptionHandler({ Exception.class })
-  public String handleException(Exception e, HttpServletResponse response, Model model) {
-    response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
-    model.addAttribute("message", e.getMessage());
-    return "inquiry/error.html";
+  @RequestMapping("error")
+  public String getError(Model model) {
+      throw new CustomControllerAdvice.MemoException();
   }
+  // @ExceptionHandler({ Exception.class })
+  // public String handleException(Exception e, HttpServletResponse response, Model model) {
+  //   response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+  //   model.addAttribute("message", e.getMessage());
+  //   return "inquiry/error.html";
+  // }
 }
