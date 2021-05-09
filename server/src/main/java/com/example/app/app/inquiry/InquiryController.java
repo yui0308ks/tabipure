@@ -1,13 +1,18 @@
 package com.example.app.app.inquiry;
 
+import javax.servlet.http.HttpServletResponse;
+
 import com.example.app.domain.entity.Inquiry;
 import com.example.app.domain.service.InquiryService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -55,7 +60,11 @@ public class InquiryController {
 
   @GetMapping("/detail/{id}")
   public String detail(@PathVariable("id") int id, Model model) {
-    model.addAttribute("inquiry", service.findById(id));
+    try {
+      model.addAttribute("inquiry", service.findById(id));
+    } catch (EmptyResultDataAccessException e) {
+      return "redirect:/inquiry/list";
+    }
     return "inquiry/detail.html";
   }
 
@@ -63,5 +72,12 @@ public class InquiryController {
   public String detail(@RequestParam("id") int id) {
     service.delete(id);
     return "redirect:/inquiry/list";
+  }
+
+  @ExceptionHandler({ Exception.class })
+  public String handleException(Exception e, HttpServletResponse response, Model model) {
+    response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+    model.addAttribute("message", e.getMessage());
+    return "inquiry/error.html";
   }
 }
